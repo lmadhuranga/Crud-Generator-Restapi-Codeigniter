@@ -51,7 +51,7 @@ class {controller_name} extends REST_Controller
             else
             {
                 // no data 
-                $json_return_array['msg'] = 'Not Found '.${controller_name_l};
+                $json_return_array['msg'] = 'Not Found ${controller_name_l}';
                 $json_return_array['status'] = 'no_data';
             }
         }
