@@ -39,7 +39,7 @@ class {controller_name} extends REST_Controller
         $json_return_array = array();
 
         // If id send send single record
-        $id = $this->input->get('id'); 
+        $id = $this->get('id'); 
         if($id!=false)
         {
             ${controller_name_l} = $this->{model_name_1}->get_by(array('id'=>$id),'*',TRUE);
