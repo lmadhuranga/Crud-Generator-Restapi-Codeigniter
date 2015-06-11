@@ -44,8 +44,7 @@ class Codegen extends CI_Controller {
                     ");
 
                 $data['alias_2'] = $result->result();
-                // print_r($data['alias_2'][0]);
-                // exit(); 
+                 
             }
             
             
@@ -60,11 +59,7 @@ class Codegen extends CI_Controller {
                 
                 $all_files = array(
                     'application/config/form_validation.php',
-                    'application/controllers/'.$this->input->post('controller').'.php',
-                    'application/models/codegen_model.php',
-                    'application/views/'.$this->input->post('view').'_add.php',
-                    'application/views/'.$this->input->post('view').'_edit.php',
-                    'application/views/'.$this->input->post('view').'_list.php'
+                    'application/controllers/'.$this->input->post('controller').'.php', 
                     );
 
                 //checking of files if they existed. comment if you want to overwrite files!
@@ -101,16 +96,7 @@ class Codegen extends CI_Controller {
                 {
 
                     if($type[$k][0] != 'exclude')
-                    {
-                        // var_dump($type[$k][0]);
-                        // var_dump($data_type);
-                        // exit();
-                        // echo "<br>";
-
-                        // echo "<br>";
-                        // var_dump($type[$k]);
-                        // echo "<br>";
-                        // exit();
+                    { 
                         $max_length ='';
                         $data_type ='';
                         $labels[] = $v;
@@ -135,89 +121,7 @@ class Codegen extends CI_Controller {
                         if (isset($length_max[$k])) {
                             $max_length = 'maxlength="'.$length_max[$k][0].'"';
                         }
-                        // if ((trim($data_type))=='int')
-                        // {
-                        //     $data_type = 'int';
-                        // }
-                        // elseif ((trim($data_type))=='varchar')
-                        // {
-                        //     $data_type = 'varchar';
-                        // }
-                        // elseif ((trim($data_type))=='datetime')
-                        // {
-                        //     $data_type = 'date';
-                        // }
-                        // elseif ((trim($data_type))=='email')
-                        // {
-                        //     $type[$k][0]= 'email';
-                        // }
-
-                        
-                        // this will create a form for Add and Edit , quite dirty for now
-                        if($type[$k][0] == 'textarea')
-                        {
-                             $add_form[] = '
-                                        <p><label for="'.$k.'">'.$v.$required.'</label>                                
-                                        <textarea class="form-control" id="'.$k.'" name="'.$k.'" '.$field_required.'><?php echo set_value(\''.$k.'\'); ?></textarea>
-                                        <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                        </p>
-                                        ';
-                                        
-                             $edit_form[] = '
-                                        <p><label for="'.$k.'">'.$v.$required.'</label>                                
-                                        <textarea class="form-control" id="'.$k.'" name="'.$k.'" '.$field_required.'><?php echo $result->'.$k.' ?></textarea>
-                                        <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                        </p>
-                                        '; 
-                                    
-                        }
-                        // dropdown
-                        else if($this->input->post($k.'default'))
-                        {
-                            $enum = explode(',',$this->input->post($k.'default'));
-                             $add_form[] = '
-                                        <p><label for="'.$k.'">'.$v.$required.'</label>                                
-                                        <?php
-                                            $enum = array('.$this->input->post($k.'default').'); 
-                                            echo form_dropdown(\''.$k.'\', $enum); 
-                                        ?>
-                                        <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                        </p>
-                                        ';
-                            $edit_form[] = '
-                                        <p><label for="'.$k.'">'.$v.$required.'</label>
-                                        <?php
-                                        $enum = array('.$this->input->post($k.'default').');                                                                    
-                                        echo form_dropdown(\''.$k.'\', $enum,$result->'.$k.'); ?>
-                                        <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                        </p>
-                                        '; 
-                        }
-                        else
-                        {
-                            //input
-                            $add_form[] = '
-                                        <div class="form-group">
-                                            <label for="'.$k.'">'.$v.$required.'</label>                              
-                                            <input class="form-control"  id="'.$k.'" name="'.$k.'" type="'.$type[$k][0].'" value="<?php echo set_value(\''.$k.'\'); ?>" '.$field_required.' '.$max_length.'  />
-                                            <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                            <p class="help-block"></p>
-                                        </div>
-                                        ';
-                            $edit_form[] = '
-                                        <div class="form-group">
-                                            <label for="'.$k.'">'.$v.$required.'</label>                                
-                                            <input class="form-control"  id="'.$k.'" name="'.$k.'" type="'.$type[$k][0].'" value="<?php echo $result->'.$k.' ?>" '.$field_required.' '.$max_length.' />
-                                            <?php echo form_error(\''.$k.'\',\'<div class="ci_error">\',\'</div>\'); ?>
-                                            <p class="help-block"></p>
-                                        </div>
-                                        ';
-                        }                           
-                         $ind_view_list[] = '
-                                            <tr>
-                                                <td><label>'.$v.'</label></td>
-                                                <td><label><?php echo $result->'.$k.' ?></label></td>
-                                            </tr>'; 
+                         
                     }
                     
                 }// end foreach()
@@ -260,15 +164,13 @@ class Codegen extends CI_Controller {
                 $form_data = implode(','."\n\t\t\t\t\t\t\t\t",$form_val_data);
                 
                 $file_validation = 'application/config/form_validation.php';
-                
-                //$search_form = array('{validation_name}','{form_val_data}');
-               // $replace_form = array($this->input->post('validation'),$form_data);
+                 
 				$form_validation_data = "'".$this->input->post('table')."' => array(".$form_data.")";
-				
+				/*
 				if(file_exists('application/config/form_validation.php'))
                 {
 					$form_v = file_get_contents('application/config/form_validation.php');
-					 $old_form =  str_replace(array('<?php','?>','$config = array(',');'),'',$form_v)."\t\t\t\t,\n\n\t\t\t\t";
+					$old_form =  str_replace(array('<?php','?>','$config = array(',');'),'',$form_v)."\t\t\t\t,\n\n\t\t\t\t";
 					include('application/config/form_validation.php');
 					
 					if(isset($config[$this->input->post('table')]))
@@ -287,7 +189,7 @@ class Codegen extends CI_Controller {
                 {	
                 	$form_content = str_replace('{form_validation_data}',$form_validation_data,file_get_contents('templates/form_validation.php'));
 				
-            	}
+            	}*/
                //////////////////// path list
                 $c_path = 'application/controllers/'.$this->input->post('user_type').'/';
                 $m_path = 'application/models/';
@@ -393,131 +295,13 @@ class Codegen extends CI_Controller {
                 $file_controller = $c_path . $this->input->post('controller') . '.php';
                 
 
-              
-                // create view/form, TODO, make this a function! and make a stop overwriting files
+               
                 
-                //VIEW/LIST 
-                $list_v = file_get_contents('templates/list.php');
-                $search = array(
-                                    '{table}',
-                                    '{C_table_name}',
-                                    '{user_type}',
-                                );
-                $replace = array(
-                                    $this->input->post('table'),
-                                    str_replace('_', ' ', ucfirst($this->input->post('table'))),
-                                    $this->input->post('user_type'),
-                                );
-
-                $list_v = str_replace($search, $replace, $list_v);                
                 
-                $list_content = str_replace('{controller_name_l}',$this->input->post('controller'),$list_v);
-                
- 
-                
-                //VIEW/ indivieial 
-                $ind_view_v = file_get_contents('templates/view.php');
-                $ind_view_search = array(
-                                        '{ind_view_list}',
-                                        '{primary}',
-                                        '{table}',
-                                        '{C_table_name}',
-                                        '{controller_name_l}',
-                                        '{C_controller_name_l}',
-                                        '{primaryKey_id}',
-                                        '{user_type}',
-                                    );
-                $ind_view_replace = array(
-                                        implode("\n",$ind_view_list),
-                                        '<?php echo form_hidden(\''.$this->input->post('primaryKey').'\',$result->'.$this->input->post('primaryKey').') ?>',
-                                        $this->input->post('table'),
-                                        str_replace('_', ' ', ucfirst($this->input->post('table'))),
-                                        $this->input->post('controller'),
-                                        str_replace('_', ' ', ucfirst($this->input->post('controller'))),
-                                        $this->input->post('primaryKey'),
-                                        $this->input->post('user_type'),
-                                    );
-                
-                $ind_view_content = str_replace($ind_view_search,$ind_view_replace,$ind_view_v);
-                
- 
-                
-                //ADD FORM
-                $add_v = file_get_contents('templates/add.php');
-                $search = array(
-                                    '{table}',
-                                    '{C_table_name}',
-                                    '{C_controller_name_l}',
-                                    '{user_type}',
-                                );
-                $replace = array(
-                                    ucfirst($this->input->post('table')),
-                                    str_replace('_', ' ', ucfirst($this->input->post('table'))),
-                                    str_replace('_', ' ', ucfirst($this->input->post('controller'))),
-                                    $this->input->post('user_type'),
-                                );
-
-                $add_v = str_replace($search, $replace, $add_v);
-                
-                $add_v_content = str_replace('{controller_name_l}',$this->input->post('controller'),$add_v);
-                
-                $add_content = str_replace('{forms_inputs}',implode("\n",$add_form),$add_v_content);
-                
-                //EDIT FORM
-                $edit_v = file_get_contents('templates/edit.php');
-                $edit_search = array(
-                                        '{forms_inputs}',
-                                        '{primary}',
-                                        '{table}',
-                                        '{C_table_name}',
-                                        '{C_controller_name_l}',
-                                        '{controller_name_l}',
-                                        '{user_type}',
-                                       
-                                    );
-                $edit_replace = array(
-                                        implode("\n",$edit_form),
-                                        
-                                        '<?php if (@!empty($result->id)): ?>  <input type="hidden" value="<?php echo $result->'.$this->input->post('primaryKey').'; ?>" id="'.$this->input->post('primaryKey').'" name="'.$this->input->post('primaryKey').'">  <?php endif ?>',
-                                        ucfirst($this->input->post('table')),
-                                        str_replace('_', ' ', ucfirst($this->input->post('table'))),
-                                        str_replace('_', ' ', ucfirst($this->input->post('controller'))),
-                                        $this->input->post('controller'),
-                                        $this->input->post('user_type'),
-                                    );
-
-                $edit_content = str_replace($edit_search,$edit_replace,$edit_v);
-                
-                $_layout_model_file = file_get_contents('templates/_layout_modal.php');
-                
-                //tb_table_list in _main_layout
-                $_layout_main_file = file_get_contents('templates/_layout_main.php');
-                $_layout_main_search = array(
-                                       '{db_table_list}',
-                                       '{controller_name_l}',
-                                       '{user_type}',
-                                    );
-                $_layout_main_replace = array(
-                                        implode("\n\t\t\t\t\t\t\t\t\t\t",$li_table_list),
-                                        $this->input->post('controller'),
-                                        $this->input->post('user_type'),
-                                    );
-                
-                $_layout_main_content = str_replace($_layout_main_search,$_layout_main_replace,$_layout_main_file);
                 
                 $write_files = array(
                                 'Model' => array($file_model, $m_content),
-                                'Controller' => array($file_controller, $c_content),
-                                'view_edit'  => array($v_path.$this->input->post('view').'_edit.php', $edit_content),
-                                'view_list'  => array($v_path.$this->input->post('view').'_list.php', $list_content),
-                                'view_add'   => array($v_path.$this->input->post('view').'_add.php', $add_content),
-                                'view_ind'   => array($v_path.$this->input->post('view').'_view.php', $ind_view_content),
-                                '_layout_main_content'   => array($v_path.'_layout_main.php', $_layout_main_content),
-                                '_layout_model_file'   => array($v_path.'_layout_model.php', $_layout_model_file),
-                                'page_head'   => array($v_path.'components/page_head.php', file_get_contents('templates/components/page_head.php')),
-                                'page_tail'   => array($v_path.'components/page_tail.php', file_get_contents('templates/components/page_tail.php')),
-                               //'form_validation'  => array($file_validation, $form_content) 
-                               
+                                'Controller' => array($file_controller, $c_content) 
                                 );
 
                 foreach($write_files as $wf)
@@ -534,14 +318,11 @@ class Codegen extends CI_Controller {
                     exit;
                 }
                 else
-                {
-                    $data['list_content'] = $list_content;
-                    
-                    $data['add_content'] = $add_content;
-                                        
-                    $data['edit_content'] = $edit_content;
+                { 
                     
                     $data['controller'] = $c_content;
+
+                    $data['model'] = $m_content;
                     
                     $this->load->view('done',$data);
                     //echo 'DONE! view it here '. anchor(base_url().'index.php/'.$this->input->post('controller').'/');
