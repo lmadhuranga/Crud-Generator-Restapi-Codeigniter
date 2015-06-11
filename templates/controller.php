@@ -1,5 +1,4 @@
-<?php
-require(APPPATH'.libraries/REST_Controller.php');
+<?php 
 /**
 *
 *

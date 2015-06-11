@@ -1365,7 +1365,7 @@ abstract class REST_Controller extends MY_Controller
      * Check to see if the user is logged into the web app with a php session key.
      */
     protected function _check_php_session()
-    {
+    { 
         $key = $this->config->item('auth_source');
         if (!$this->session->userdata($key)) {
             $this->response(array('status' => false, 'error' => 'Not Authorized'), 401);
