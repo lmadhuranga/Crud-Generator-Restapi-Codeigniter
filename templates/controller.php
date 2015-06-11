@@ -42,27 +42,17 @@ class {controller_name} extends REST_Controller
         $id = $this->input->get('id'); 
         if($id!=false)
         {
-            ${controller_name_l} = $this->{model_name_1}->get_by(array('id'=>$id),'*');
+            ${controller_name_l} = $this->{model_name_1}->get_by(array('id'=>$id),'*',TRUE);
             if (sizeof(${controller_name_l})>0)
             {
-                $json_return_array['data']      = end(${controller_name_l});
+                $json_return_array['data']      = (${controller_name_l});
                 $json_return_array['status']    = 'success';
             }
             else
             {
-                // get all record
-                ${controller_name_l}_list = $this->{model_name_1}->get_by(array(),'{fields_list}');   
-                if (sizeof(${controller_name_l}_list)>0)
-                {
-                    $json_return_array['data'] = ${controller_name_l}_list;
-                    $json_return_array['status'] = 'success';
-                }
-                else
-                {
-                    // no data 
-                    $json_return_array['msg'] = 'No Data';
-                    $json_return_array['status'] = 'no_data';
-                }
+                // no data 
+                $json_return_array['msg'] = 'Not Found '.${controller_name_l};
+                $json_return_array['status'] = 'no_data';
             }
         }
         else
