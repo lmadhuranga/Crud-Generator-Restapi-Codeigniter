@@ -80,7 +80,7 @@ $autoload['helper'] = array('codegen','url');
 |
 */
 
-$autoload['config'] = array('site_config');
+$autoload['config'] = array('site_config','rest');
 
 
 /*
