@@ -20,6 +20,10 @@ class Codegen extends CI_Controller {
         $this->load->library('form_validation');
 		$this->load->database();
 		$this->load->helper('url');
+        $generated_year = date('Y');
+        $generated_datetime = date('Y-m-d H:i:s');
+
+
         // load the form
         if ($this->input->post('table_data') || !$_POST)
         {
@@ -192,25 +196,14 @@ class Codegen extends CI_Controller {
             	}*/
                //////////////////// path list
                 $c_path = 'application/controllers/'.$this->input->post('user_type').'/';
-                $m_path = 'application/models/';
-                $v_path = 'application/views/'.$this->input->post('user_type').'/';
+                $m_path = 'application/models/'; 
                 
                 // create user_type folder
                 if(!is_dir($c_path)){
                     mkdir($c_path);
                 }
-                // create components
-                if(!is_dir($v_path)){
-                    mkdir($v_path);
-                    $temp_v_path = $v_path.'components/';
-                    
-                    mkdir($temp_v_path);
-                    
-                }
-                elseif(!is_dir($v_path.'components/'))
-                {
-                    mkdir($v_path.'components/');
-                }
+                
+               
                 
 
                 // $li_table_list = array();
@@ -236,6 +229,8 @@ class Codegen extends CI_Controller {
                                 '{form_data}',
                                 '{fields_list}',
                                 '{model_new_function_data}',
+                                '{generated_year}',
+                                '{generated_datetime}',
                                 
                     );
                 $replace = array(
@@ -247,6 +242,8 @@ class Codegen extends CI_Controller {
                                 $form_data,
                                 $fields,
                                 $model_new_function_data,
+                                $generated_year,
+                                $generated_datetime,
                     );
 
 
@@ -270,7 +267,9 @@ class Codegen extends CI_Controller {
                                 '{fields_list_array}',
                                 '{model_name_1}',
                                 '{C_controller_name_l}',
-                                '{user_type}'
+                                '{user_type}',
+                                '{generated_year}',
+                                '{generated_datetime}',
                                  );
                 $replace = array(
                                 ucfirst($this->input->post('controller')), 
@@ -286,6 +285,8 @@ class Codegen extends CI_Controller {
                                 ($this->input->post('table').'_model'),
                                 str_replace('_', ' ', ucfirst($this->input->post('controller'))),
                                 $this->input->post('user_type'),
+                                $generated_year,
+                                $generated_datetime,
 
                             );
 
