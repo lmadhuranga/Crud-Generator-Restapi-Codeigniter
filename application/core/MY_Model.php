@@ -49,7 +49,7 @@ class MY_Model extends CI_Model
     	// {
     	// 	$this->db->order_by($this->_order_by);
     	// }
-        $this->db->limit($perpage,$start);
+        if($start!=0) $this->db->limit($perpage,$start);
     	return $this->db->get($this->_table_name)->$method($array); 
     	
     }//Function End get()---------------------------------------------------FUNEND()
