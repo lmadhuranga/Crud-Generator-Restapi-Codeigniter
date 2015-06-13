@@ -1,5 +1,5 @@
 <form action="<?php echo current_url();?>" method="post">
-<label style="font-weight: bold; color:red;">1. Set the table prefix in Config file ./application/config/site_config/ -> tbl_prefix</label>
+<label style="font-weight: bold; color:red;">1. Set the table prefix in Config file ./application/config/site_config.php -> tbl_prefix</label>
 <p style="font-weight: bold; color:red;">Database tables/data and files will be reverted every hour</p>
 <p>MySQL Table
 <?php
