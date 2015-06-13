@@ -103,34 +103,7 @@ if(isset($alias))
             else{
                 
                  $sel = 'text';
-            }
-            // echo $alias_2[$key]->COLUMN_NAME. " : ".$alias_2[$key]->DATA_TYPE. '<br>';
-
-            // if((trim($alias_2[$key]->DATA_TYPE))=='int')
-            // {
-            //     $input_type='int';
-            // }
-            // elseif((trim($alias_2[$key]->DATA_TYPE))=='varchar')
-            // {
-            //     $input_type='varchar';
-            // }
-            // elseif((trim($alias_2[$key]->DATA_TYPE))=='datetime')
-            // {
-            //     $input_type='datetime';
-            // }
-
-
-            // echo ' max :'.form_input('rules['.$a->Field.'][]',(empty($alias_2[$key]->CHARACTER_MAXIMUM_LENGTH)&&($alias_2[$key]->DATA_TYPE=='int'))? 11 :  (!is_null($alias_2[$key]->CHARACTER_MAXIMUM_LENGTH)? $alias_2[$key]->CHARACTER_MAXIMUM_LENGTH:'')) ;
-
-            // var_dump($alias_2[0]);
-            // exit();
-             echo '<br> Type::'.form_dropdown('type['.$a->Field.'][]', $type,$sel);
-            echo '<br>';
-            // if (!empty($input_type))
-            // {
-                // echo ' DATA_TYPE:'.form_input('DATA_TYPE['.$a->Field.']',$alias_2[$key]->DATA_TYPE);
-            // }
-            // echo ' max :'.form_input('rules['.$a->Field.'][]',(empty($alias_2[$key]->CHARACTER_MAXIMUM_LENGTH)&&($alias_2[$key]->DATA_TYPE=='int'))? 'max_length[11]' : !empty($alias_2[$key]->CHARACTER_MAXIMUM_LENGTH)?('max_length['.$alias_2[$key]->CHARACTER_MAXIMUM_LENGTH.']') : '' );
+            } 
             echo '<br>';
             echo form_checkbox('rules['.$a->Field.'][]', 'required', ((strtolower($a->Null)=='no') ? TRUE : FALSE) ) . ' required :: ';
             echo form_checkbox('rules['.$a->Field.'][]', 'trim', TRUE) . ' trim :: ';
