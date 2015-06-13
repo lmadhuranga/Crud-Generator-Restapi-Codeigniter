@@ -17,7 +17,7 @@
 /*                                                                                 */
 /*                                                                                 */
 /***********************************************************************************/
-class  {table}_model extends MY_Model
+class  {C_table_name}_model extends MY_Model
 {
     protected $_table_name      ='{prefix_table}';
     protected $_primary_key     ='{primaryKey}';
