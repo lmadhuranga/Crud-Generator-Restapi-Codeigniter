@@ -49,14 +49,12 @@ class {controller_name} extends REST_Controller
             // any record exist
             if (sizeof(${controller_name_l})>0)
             {
-                $json_return_array['data']      = (${controller_name_l});
-                $json_return_array['status']    = 'success';
+                $json_return_array      = (${controller_name_l});
             }
             else
             {
                 // not found any record
-                $json_return_array['msg'] = 'Not Found {controller_name_l}';
-                $json_return_array['status'] = 'no_data';
+                $json_return_array['error']['msg']  = 'Not Found {controller_name_l}'; 
             }
         }
         else
