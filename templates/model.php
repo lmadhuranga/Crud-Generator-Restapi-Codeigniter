@@ -21,7 +21,7 @@ class  {C_table_name}_model extends MY_Model
 {
     protected $_table_name      ='{prefix_table}';
     protected $_primary_key     ='{primaryKey}';
-    protected $_order_by        ='ASC';
+    protected $_order_by        ='{primaryKey}';
     // protected $_primary_filter  ='';
     protected $_timestamps      =TRUE;    
     // rules
