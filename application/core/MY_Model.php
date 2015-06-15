@@ -63,7 +63,7 @@ class MY_Model extends CI_Model
     public function get_by($where='', $fields = NULL, $id = NULL, $single = FALSE, $AsOrder="ASC", $perpage=0, $start=0, $array='array')
     {
     	$this->db->where($where);
-    	return $this->get(NULL, $single,$AsOrder);
+    	return $this->get(NULL, $single,FALSE, $AsOrder);
     }//Function End get_by()---------------------------------------------------FUNEND()
 
 
