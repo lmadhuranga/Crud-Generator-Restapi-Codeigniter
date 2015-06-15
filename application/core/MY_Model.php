@@ -22,7 +22,7 @@ class MY_Model extends CI_Model
     //
     //@ type :
     //#return type :
-    public function get($fields = NULL, $id = NULL, $single = FALSE, $perpage=0, $start=0, $array='array')
+    public function get($fields = NULL, $id = NULL, $single = FALSE, $AsOrder = "ASC", $perpage=0, $start=0, $array='array')
     {
         if ($fields !==NULL)
         {
@@ -45,10 +45,10 @@ class MY_Model extends CI_Model
     		$method = 'result';
     	}
 
-    	// if(!count($this->db->ar_order_by))
-    	// {
-    	// 	$this->db->order_by($this->_order_by);
-    	// }
+    	if(!count($this->db->ar_order_by))
+    	{
+    		$this->db->order_by($this->_order_by,$AsOrder);
+    	}
         if($start!=0) $this->db->limit($perpage,$start);
     	return $this->db->get($this->_table_name)->$method($array); 
     	
@@ -60,10 +60,10 @@ class MY_Model extends CI_Model
     //
     //@ type :
     //#return type :
-    public function get_by($where='', $fields = NULL, $id = NULL, $single = FALSE, $perpage=0, $start=0, $array='array')
+    public function get_by($where='', $fields = NULL, $id = NULL, $single = FALSE, $AsOrder="ASC", $perpage=0, $start=0, $array='array')
     {
     	$this->db->where($where);
-    	return $this->get(NULL, $single);
+    	return $this->get(NULL, $single,$AsOrder);
     }//Function End get_by()---------------------------------------------------FUNEND()
 
 
